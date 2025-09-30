@@ -29,7 +29,6 @@ RUN mkdir -p /data && chown runner:runner /data
 
 USER runner
 
-RUN mkdir actions-runner
 WORKDIR /app/actions-runner
 
 RUN curl -o actions-runner-linux-x64-${VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-linux-x64-${VERSION}.tar.gz
