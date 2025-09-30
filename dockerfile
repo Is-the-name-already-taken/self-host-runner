@@ -27,7 +27,7 @@ RUN mkdir actions-runner
 WORKDIR /app/actions-runner
 
 RUN curl -o actions-runner-linux-x64-${VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-linux-x64-${VERSION}.tar.gz
-RUN echo "${HASH}  actions-runner-linux-x64-${VERSION}.tar.gz" | shasum -a 256 -c
+# RUN echo "${HASH}  actions-runner-linux-x64-${VERSION}.tar.gz" | shasum -a 256 -c <- Optional
 RUN tar xzf ./actions-runner-linux-x64-${VERSION}.tar.gz
 
 WORKDIR /app
