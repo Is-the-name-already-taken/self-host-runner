@@ -14,13 +14,9 @@ ENV TOKEN=${TOKEN}
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
+COPY requirements.txt .
 
-RUN apt update && apt install -y --no-install-recommends \
-    curl \
-    git \
-    tar \
-    ca-certificates \
-    perl \
+RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m runner

@@ -1,0 +1,6 @@
+curl
+git
+tar
+ca-certificates
+libicu-dev
+libssl-dev
