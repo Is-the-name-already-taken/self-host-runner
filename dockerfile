@@ -23,6 +23,12 @@ RUN apt update && apt install -y --no-install-recommends \
     perl \
     && rm -rf /var/lib/apt/lists/*
 
+RUN useradd -m runner
+RUN mkdir actions-runner && chown runner:runner /app/actions-runner
+RUN mkdir -p /data && chown runner:runner /data
+
+USER runner
+
 RUN mkdir actions-runner
 WORKDIR /app/actions-runner
 
