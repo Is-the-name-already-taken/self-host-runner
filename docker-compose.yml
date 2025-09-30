@@ -6,10 +6,12 @@ services:
       args:
         VERSION: ${VERSION}
         HASH: ${HASH}
-      env_file:
-        - .env
+        ORGANIZATION: ${ORGANIZATION}
+        TOKEN: ${TOKEN}
       
     container_name: self-host-runner
     restart: "always"
+    env_file:
+      - .env
     volumes:
       - ./data:/data
