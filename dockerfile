@@ -33,4 +33,4 @@ RUN tar xzf ./actions-runner-linux-x64-${VERSION}.tar.gz
 
 WORKDIR /app
 
-CMD ["./entrypoint.sh", "${ORGANIZATION}", "${TOKEN}"]
+ENTRYPOINT ["./entrypoint.sh"]
