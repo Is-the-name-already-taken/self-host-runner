@@ -1,0 +1,15 @@
+services:
+  github-runner:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        VERSION: ${VERSION}
+        HASH: ${HASH}
+      env_file:
+        - .env
+      
+    container_name: self-host-runner
+    restart: "always"
+    volumes:
+      - ./data:/data
