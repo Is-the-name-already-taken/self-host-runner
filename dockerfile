@@ -20,6 +20,7 @@ RUN apt update && apt install -y --no-install-recommends \
     git \
     tar \
     ca-certificates \
+    perl \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir actions-runner
