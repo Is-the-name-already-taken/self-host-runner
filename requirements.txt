@@ -5,7 +5,3 @@ ca-certificates
 libicu-dev
 libssl-dev
 podman
-unzip
-uidmap
-fuse-overlayfs
-slirp4netns
