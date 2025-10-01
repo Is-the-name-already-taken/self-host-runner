@@ -9,6 +9,10 @@ services:
         ORGANIZATION: ${ORGANIZATION}
         TOKEN: ${TOKEN}
         RUNNER_NAME: ${RUNNER_NAME}
+        HOST_UID: ${HOST_UID}
+        HOST_GID: ${HOST_GID}
+
+    image: localhost/self-host-runner_github-runner
       
     container_name: self-host-runner
     restart: "always"

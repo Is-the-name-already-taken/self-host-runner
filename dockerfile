@@ -21,7 +21,6 @@ RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt)
 
 RUN userdel -r runner || true
 RUN groupdel runner || true
-RUN useradd -m runner
 RUN groupadd -g ${HOST_GID} runner && \
     useradd -u ${HOST_UID} -g runner -m runner
 
