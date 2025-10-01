@@ -12,6 +12,10 @@ services:
         HOST_UID: ${HOST_UID}
         HOST_GID: ${HOST_GID}
 
+    environment:
+      - XDG_RUNTIME_DIR=/run/user/${HOST_UID}
+      - CONTAINER_HOST=unix:///run/user/${HOST_UID}/podman/podman.sock
+
     image: localhost/self-host-runner_github-runner
       
     container_name: self-host-runner

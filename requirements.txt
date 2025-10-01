@@ -9,3 +9,4 @@ unzip
 uidmap
 fuse-overlayfs
 slirp4netns
+sudo

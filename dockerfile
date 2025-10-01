@@ -22,6 +22,9 @@ RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt)
 RUN groupadd -g ${HOST_GID} runner && \
     useradd -m -u ${HOST_UID} -g ${HOST_GID} -s /bin/bash runner
 
+RUN usermod -aG sudo runner && \
+    echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 RUN mkdir actions-runner && chown runner:runner /app/actions-runner
 RUN mkdir -p /data && chown runner:runner /data
 
