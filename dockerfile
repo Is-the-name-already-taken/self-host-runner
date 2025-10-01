@@ -19,14 +19,22 @@ COPY requirements.txt .
 RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir actions-runner
-RUN mkdir -p /data
+RUN groupadd -g ${HOST_GID} runner && \
+    useradd -m -u ${HOST_UID} -g ${HOST_GID} -s /bin/bash runner
+
+RUN mkdir actions-runner && chown runner:runner /app/actions-runner
+RUN mkdir -p /data && chown runner:runner /data
+
+RUN mkdir -p /run/user/${HOST_UID}/podman && \
+    chown -R ${HOST_UID}:${HOST_GID} /run/user/${HOST_UID} /data /app/actions-runner
 
 WORKDIR /app/actions-runner
 
 RUN curl -o actions-runner-linux-x64-${VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-linux-x64-${VERSION}.tar.gz
 # RUN echo "${HASH}  actions-runner-linux-x64-${VERSION}.tar.gz" | shasum -a 256 -c <- Optional
 RUN tar xzf ./actions-runner-linux-x64-${VERSION}.tar.gz
+
+USER runner
 
 WORKDIR /app
 
