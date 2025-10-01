@@ -19,15 +19,8 @@ COPY requirements.txt .
 RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
-RUN userdel -r runner || true
-RUN groupdel runner || true
-RUN groupadd -g ${HOST_GID} runner && \
-    useradd -u ${HOST_UID} -g runner -m runner
-
-RUN mkdir actions-runner && chown runner:runner /app/actions-runner
-RUN mkdir -p /data && chown runner:runner /data
-
-USER runner
+RUN mkdir actions-runner
+RUN mkdir -p /data
 
 WORKDIR /app/actions-runner
 

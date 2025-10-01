@@ -4,5 +4,5 @@ tar
 ca-certificates
 libicu-dev
 libssl-dev
-docker.io
+podman
 unzip

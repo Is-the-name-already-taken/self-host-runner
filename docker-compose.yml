@@ -19,5 +19,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ${SOCKET_PATH}:/var/run/docker.sock
+      - ${SOCKET_PATH}:/run/podman/podman.sock
       - ./data:/data
