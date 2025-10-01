@@ -5,8 +5,12 @@ VOLUME /data
 
 ARG VERSION
 ARG HASH
+ARG HOST_UID
+ARG HOST_GID
 ENV VERSION=${VERSION}
 ENV HASH=${HASH}
+ENV HOST_UID=${HOST_UID}
+ENV HOST_GID=${HOST_GID}
 
 COPY entrypoint.sh .
 RUN chmod +x entrypoint.sh
@@ -15,7 +19,12 @@ COPY requirements.txt .
 RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
+RUN userdel -r runner || true
+RUN groupdel runner || true
 RUN useradd -m runner
+RUN groupadd -g ${HOST_GID} runner && \
+    useradd -u ${HOST_UID} -g runner -m runner
+
 RUN mkdir actions-runner && chown runner:runner /app/actions-runner
 RUN mkdir -p /data && chown runner:runner /data
 

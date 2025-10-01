@@ -15,4 +15,5 @@ services:
     env_file:
       - .env
     volumes:
+      - ${SOCKET_PATH}:/var/run/docker.sock
       - ./data:/data
