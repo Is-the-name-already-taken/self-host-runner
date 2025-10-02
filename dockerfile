@@ -19,7 +19,8 @@ COPY requirements.txt .
 RUN apt update && apt install -y --no-install-recommends $(cat requirements.txt) \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -s /bin/bash runner
+RUN groupadd -g ${HOST_GID} runner && \
+    useradd -m -u ${HOST_UID} -g ${HOST_GID} -s /bin/bash runner
 
 RUN usermod -aG sudo runner && \
     echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -27,8 +28,8 @@ RUN usermod -aG sudo runner && \
 RUN mkdir actions-runner && chown runner:runner /app/actions-runner
 RUN mkdir -p /data && chown runner:runner /data
 
-RUN mkdir -p /run/user/0/podman && \
-    chown -R runner:runner /data /app/actions-runner
+RUN mkdir -p /run/user/${HOST_UID}/podman && \
+    chown -R ${HOST_UID}:${HOST_GID} /run/user/${HOST_UID} /data /app/actions-runner
 
 WORKDIR /app/actions-runner
 

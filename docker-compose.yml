@@ -13,8 +13,8 @@ services:
         HOST_GID: ${HOST_GID}
 
     environment:
-      - XDG_RUNTIME_DIR=/run/user/0
-      - CONTAINER_HOST=unix:///run/user/0/podman/podman.sock
+      - XDG_RUNTIME_DIR=/run/user/${HOST_UID}
+      - CONTAINER_HOST=unix:///run/user/${HOST_UID}/podman/podman.sock
 
     image: localhost/self-host-runner_github-runner
       
@@ -23,5 +23,5 @@ services:
     env_file:
       - .env
     volumes:
-      - ${PODMAN_SOCKET_PATH}:/run/user/0/podman/podman.sock
+      - ${PODMAN_SOCKET_PATH}:/run/user/${HOST_UID}/podman/podman.sock
       - ./data:/data
