@@ -22,6 +22,10 @@ services:
     restart: "always"
     env_file:
       - .env
+
+    user: ${HOST_UID}:${HOST_GID}
+    groups:
+      - ${HOST_GID}
     volumes:
       - ${PODMAN_SOCKET_PATH}:/run/user/${HOST_UID}/podman/podman.sock
       - ./data:/data
