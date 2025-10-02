@@ -1,6 +1,5 @@
 services:
   github-runner:
-    userns_mode: "host"
     build:
       context: .
       dockerfile: dockerfile
